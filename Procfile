@@ -1,1 +1,1 @@
-web: bundle exec ruby spike.rb -p $PORT
+web: bundle exec ruby app.rb -p $PORT
