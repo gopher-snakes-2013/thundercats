@@ -4,6 +4,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'shotgun'
 require 'models/post'
+require 'models/comment'
 
 
 # This loads environment variables from the .env file
@@ -17,17 +18,7 @@ get '/' do
   erb :index
 end
 
-post '/' do
+post '/form' do
   Post.create(:title => params["title"], :content => params["content"])
   redirect '/'
 end
-
-# post '/' do
-#   Todo.create(:name => params["todo_name"])
-#   redirect '/'
-# end
-
-# post '/complete' do
-#   p Todo.find_by(:name => params["todo_name"])
-#   redirect '/'
-# end
