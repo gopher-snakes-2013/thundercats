@@ -1,0 +1,26 @@
+<h1>Discussion Forum</h1>
+<p>Enter a JOKE!</p>
+<form action="/" method="post">  
+	<label>Title
+		<br/>
+	  <input type="text" name="title">  
+  </label>
+  <br/>
+  <label>Content
+  	<br/>
+  	<textarea rows="5" cols="50" name="content"></textarea>
+  </label>
+	  <input type="submit" value="Submit">
+</form>  
+<ul>
+	<% @posts.each do |post| %>
+
+		<li><%= post.title %>
+			<br/>
+			<em><%= post.content %></em>
+		</li>
+
+	<% end %>
+
+</ul>
+<p>hi cricket... aka code name kunami</p>
