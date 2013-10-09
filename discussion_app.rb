@@ -13,7 +13,13 @@ Dotenv.load
 set :database, ENV['DATABASE_URL']
 
 get '/' do
+	@posts = Post.all
   erb :index
+end
+
+post '/' do
+  Post.create(:title => params["title"], :content => params["content"])
+  redirect '/'
 end
 
 # post '/' do

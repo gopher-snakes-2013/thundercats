@@ -8,7 +8,7 @@ begin
     t.rspec_opts = %w[--color]
     t.pattern = 'spec/*_spec.rb'
   end
-
+  
   task :default => :spec
 rescue LoadError
 end
