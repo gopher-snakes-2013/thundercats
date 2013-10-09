@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path('.'))
 
 require 'sinatra'
 require 'sinatra/activerecord'
-
+require 'shotgun'
 require 'models/post'
 
 
