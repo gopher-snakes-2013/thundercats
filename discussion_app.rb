@@ -11,10 +11,10 @@ begin
 require 'dotenv'
 Dotenv.load
 
+set :database, ENV['DATABASE_URL']
+
 rescue LoadError
 end
-
-set :database, ENV['DATABASE_URL']
 
 get '/' do
 	@posts = Post.all
