@@ -2,13 +2,17 @@ $LOAD_PATH.unshift(File.expand_path('.'))
 
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'shotgun'
+# require 'shotgun'
 require 'models/post'
 require 'models/comment'
 
 # This loads environment variables from the .env file
+begin
 require 'dotenv'
 Dotenv.load
+
+rescue LoadError
+end
 
 set :database, ENV['DATABASE_URL']
 
