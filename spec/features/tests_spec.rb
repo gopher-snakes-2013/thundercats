@@ -1,11 +1,10 @@
 require 'spec_helper'
 
+include Rack::Test::Methods
 
-  include Rack::Test::Methods
-
-  def app
-    Sinatra::Application
-  end
+def app
+  Sinatra::Application
+end
 
 describe 'Page exists' do
   it "should load the home page" do
@@ -26,6 +25,7 @@ describe Comment do
   it { should validate_presence_of(:content) }
   it { should_not allow_value("*"*1).for(:content) } 
 end
+
 
 
 # feature 'page exists' do

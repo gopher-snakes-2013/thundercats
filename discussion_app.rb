@@ -6,7 +6,6 @@ require 'shotgun'
 require 'models/post'
 require 'models/comment'
 
-
 # This loads environment variables from the .env file
 require 'dotenv'
 Dotenv.load
@@ -21,4 +20,15 @@ end
 post '/form' do
   Post.create(:title => params["title"], :content => params["content"])
   redirect '/'
+end
+
+get '/detail/:id' do
+  @specific_post = Post.find(params[:id])
+  @comments = @specific_post.comments
+  erb :detail
+end
+
+post '/comment' do
+  Comment.create(:post_id => params["post_id"], :content => params["content"])
+  redirect "/detail/#{params['post_id']}"
 end
