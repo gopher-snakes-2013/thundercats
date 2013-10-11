@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<head> 
+  <title> <%=@specific_post.title %> </title>
+  <link href="../public/style.css" rel="stylesheet" type="text/css">
+</head>
+
 <h2><%= @specific_post.title %></h2>
 <p><%= @specific_post.content %></p>
+<br/>
+
+<%= @comm_errors %>
 
 <form action="/comment" method="post"><br/>
   <label>Comment<br/>
@@ -7,7 +16,7 @@
   </label>
   <input type="submit" value="Submit">
   <input type="hidden" name="post_id" value="<%= @specific_post.id %>"> 
-</form>  
+</form>
 
 <ol>
 <% @comments.each do |comment| %>
@@ -16,3 +25,4 @@
 </ol>
 
 <h4><a href="/">Go Home</a></h4>
+</html>
