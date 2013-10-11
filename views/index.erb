@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<head> 
+  <title>jokez f'days</title>
+  <link href="../public/style.css" rel="stylesheet" type="text/css">
+</head>
+
 <h1>JokeZ</h1>
 
 <ul>
@@ -11,15 +17,21 @@
 
 <p>Enter a JOKE!</p>
 
+<% unless @post.errors.empty? %>
+  <%= @post.errors.full_messages.first %>
+<% end %>
+
+<br/><br/>
+
 <form action="/form" method="post">  
 	<label>Title
 		<br/>
-	  <input type="text" name="title">  
+	  <input type="text" name="title" value="<%=@post.title%>">  
   </label>
   <br/>
   <label>Content
   	<br/>
-  	<textarea rows="5" cols="50" name="content"></textarea>
+  	<textarea rows="5" cols="50" name="content"><%=@post.content%></textarea>
   </label>
 	  <input type="submit" value="Submit">
 </form>  
