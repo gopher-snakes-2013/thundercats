@@ -5,24 +5,32 @@
 </head>
 
 <body>
-<h1>jokez</h1>
+<div class="header">
+  <a href="/">
+    <h1>jokez</h1>
+  </a>
   <% @posts.each do |post| %>
     <p><a href="/detail/<%= post.id %>"><%= post.title %></a></p>
-      <!-- <br/><em><%= post.content[0..25] %></em><p> -->
+    <!-- <br/><em><%= post.content[0..25] %></em><p> -->
   <% end %>
+</div>
 
-<br/>
-<hr>
-<br/>
-
-<span class="header">enter a joke</span><br/><br/>
-<form action="/form" method="post">
-	<input type="text" size="80" name="title" placeholder="SO YOU GOT JOKES?!">
-  <br/>
-	<input type="text" size="80" name="content" placeholder="PUNCHLINE">
-  <br/>
-  <input type="submit" value="submit">
-</form>
+<div class="body_container">
+  <br/><br/>
+  <div class="body">
+    <span class="header_prompt">enter a joke</span>
+    <br/><br/>
+    <%= @post_errors %>
+    <br/><br/>
+    <form action="/form" method="post">
+    	<input type="text" size="80" name="title" placeholder="SO YOU GOT JOKES?!" value="<%= @post.title %>">
+      <br/>
+    	<input type="text" size="80" name="content" placeholder="PUNCHLINE" value="<%= @post.content %>">
+      <br/>
+      <input type="submit" value="submit">
+    </form>
+  </div>
+</div>
 
 </body>
 </html>

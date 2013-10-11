@@ -44,19 +44,20 @@ post '/comment' do
   end
 end
 
-# Initialize render_home_page with local variables if they 
+# Initialize render_home_page with local variables if they
 # exist otherwise create new @post and @posts
 helpers do
   def render_home_page(local_variables={})
     @post = local_variables.fetch(:post, Post.new)
     @posts = local_variables.fetch(:posts, Post.all)
+    @post_errors = @post.errors.full_messages.first.to_s.downcase
     erb :index
   end
 
   def render_detail_page
     @specific_post = Post.find(params["post_id"])
     @comments = @specific_post.comments
-    @comm_errors = @comment.errors.full_messages.first
+    @comm_errors = @comment.errors.full_messages.first.downcase
     erb :detail
   end
 end

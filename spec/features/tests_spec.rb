@@ -23,18 +23,18 @@ describe Post do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
     it { should_not allow_value("*"*4).for(:title) }
-  end 
+  end
 end
 
 describe Comment do
   context "checking validations" do
     it { should belong_to(:post) }
     it { should validate_presence_of(:content) }
-    it { should_not allow_value("*"*1).for(:content) } 
+    it { should_not allow_value("*"*1).for(:content) }
   end
 end
 
-# CAPYBARA 
+# CAPYBARA
 
 feature 'Index page errors' do
   scenario "user inputs too short title" do
@@ -42,57 +42,56 @@ feature 'Index page errors' do
     fill_in "title", with: "hi"
     fill_in "content", with: "what"
 
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Needs more than 4 characters")
+    expect(page).to have_content("Needs more than 4 characters".downcase)
   end
 
   scenario "user inputs too short content" do
     visit '/'
     fill_in "title", with: "An aweseome joke"
     fill_in "content", with: "a"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Needs more than 1 character")
+    expect(page).to have_content("Needs more than 1 character".downcase)
   end
 
   scenario "user inputs blank for title" do
     visit '/'
     fill_in "title", with: ""
     fill_in "content", with: "aeiou and sometimes y"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Title can't be blank".downcase)
   end
 
   scenario "user inputs blank for content" do
     visit '/'
     fill_in "content", with: ""
     fill_in "title", with: "An interesting title"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("Content can't be blank".downcase)
   end
 
   scenario "user inputs blank for content" do
     visit '/'
     fill_in "content", with: ""
     fill_in "title", with: "An interesting title"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("Content can't be blank".downcase)
   end
 end
 
 feature 'Details page errors' do
 
-  scenario "user inputs blank comment" do
-    # post = Post.create(title: "title", content: "content")
-    visit '/detail/1'
+  xscenario "user inputs blank comment" do
+    visit '/detail/1/'
     fill_in "content", with: ""
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("Content can't be blank".downcase)
   end
 
 end
