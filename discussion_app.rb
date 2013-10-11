@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.expand_path('.'))
 
 require 'sinatra'
 require 'sinatra/activerecord'
-# require 'shotgun'
+require 'shotgun'
 require 'models/post'
 require 'models/comment'
 
@@ -17,13 +17,16 @@ rescue LoadError
 end
 
 get '/' do
-	@posts = Post.all
-  erb :index
+  render_home_page
 end
 
 post '/form' do
-  Post.create(:title => params["title"], :content => params["content"])
-  redirect '/'
+  @post = Post.create(:title => params["title"], :content => params["content"])
+  if @post.valid?
+    redirect '/'
+  else
+    render_home_page(:post => @post)
+  end
 end
 
 get '/detail/:id' do
@@ -33,6 +36,27 @@ get '/detail/:id' do
 end
 
 post '/comment' do
-  Comment.create(:post_id => params["post_id"], :content => params["content"])
-  redirect "/detail/#{params['post_id']}"
+  @comment = Comment.create(:post_id => params["post_id"], :content => params["content"])
+  if @comment.valid?
+    redirect "/detail/#{params['post_id']}"
+  else
+    render_detail_page
+  end
+end
+
+# Initialize render_home_page with local variables if they 
+# exist otherwise create new @post and @posts
+helpers do
+  def render_home_page(local_variables={})
+    @post = local_variables.fetch(:post, Post.new)
+    @posts = local_variables.fetch(:posts, Post.all)
+    erb :index
+  end
+
+  def render_detail_page
+    @specific_post = Post.find(params["post_id"])
+    @comments = @specific_post.comments
+    @comm_errors = @comment.errors.full_messages.first
+    erb :detail
+  end
 end
