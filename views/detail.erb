@@ -5,39 +5,56 @@
   <style>
 
   body {
-    text-align: center;
+    /*text-align: center;*/
     background: white;
     color: black;
     font-family: helvetica-light;
   }
 
-  div#header {
-    position: absolute;
+  div.header {
+    position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 75%;
+    right: 0;
     padding-top:30px;
-    text-align: center;
+    padding-bottom:30px;
+    padding-left:50px;
+    text-align: left;
     overflow: scroll;
+    background-color: #FFFFFF;
   }
 
-  div#body {
+  div.form {
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     width: 100%;
-    padding-top:30px;
-    padding-bottom:50px;
-    text-align: center;
-    background-color: #FFFFFF;
+    padding-right:30px;
+    padding-bottom:30px;
+    text-align: right;
     overflow: hidden;
   }
 
-  h1, h2 {
+  div.comments {
+    position: relative;
+    padding-left:50px;
+    font-size: 16px;
+  }
+
+  h1 {
     font-family: Monaco;
     font-size: 40px;
     color: black;
+  }
+
+  h2 {
+    font-family: Monaco;
+    font-size: 30px;
+    color: black;
+  }
+
+  p.punchline {
+    font-size:20px;
   }
 
   a:link {
@@ -59,15 +76,31 @@
     cursor: default;
   }
 
-  span.header_prompt {
+  a.home {
+    position:fixed;
+    left:0;
+    bottom:0;
+    padding-left: 60px;
+    padding-bottom: 40px;
+  }
+
+  span.joke_prompt {
+    position:relative;
+    padding-right: 1px;
     font-family: Monaco;
-    font-size: 30px;
+    font-size: 20px;
+  }
+
+  p#error {
+    position:relative;
+    padding-right: 6px;
+    font-size:12px;
   }
 
   input, textarea {
-    padding: 4px;
-    font-size: 14px;
-    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    text-align: right;
   }
 
   input[type="submit"] {
@@ -81,38 +114,36 @@
   }
 
   input[type="submit"]:hover {
-    color: red;
-    background-color: yellow;
+    color: black;
   }
 
   </style>
 </head>
 
 <body>
+  <div class="header">
+    <h2><%= @specific_post.title %></h2>
+    <p class="punchline"><%= @specific_post.content %></p>
+  </div>
 
-  <h2><%= @specific_post.title %></h2>
-  <p><%= @specific_post.content %></p>
-  <br/>
-<!--   <hr> -->
-  <br/>
-<%= @comm_errors %>
-<br/>
-<form action="/comment" method="post"><br/>
-  <textarea rows="5" cols="50" name="content" placeholder="commentz"></textarea>
-  <br/><input type="submit" value="submit">
-  <input type="hidden" name="post_id" value="<%= @specific_post.id %>">
-</form>
-<br/>
 
-<!-- <ol> -->
+  <div class="form">
+    <p id="error"><%= @comm_errors %></p>
+    <form action="/comment" method="post">
+      <textarea rows="3" cols="30" name="content" placeholder="COMMENTZ"></textarea>
+      <br/><input type="submit" value="submit">
+      <input type="hidden" name="post_id" value="<%= @specific_post.id %>">
+    </form>
+  </div>
+
+<div class="comments">
 <% @comments.each do |comment| %>
-  <!-- <li> -->
     <p><%= comment.content %></p>
-  <!-- </li> -->
 <% end %>
-<!-- </ol> -->
+</div>
+
 <br/>
-<a class="home" href="/">(take me back)</a>
+<a class="home" href="/">home</a>
 
 </body>
 </html>
