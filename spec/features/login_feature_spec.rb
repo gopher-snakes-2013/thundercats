@@ -28,6 +28,6 @@ feature "user sign up" do
 
     click_on "sign up"
 
-    expect(page).to have_content("to jokez landz CartsMgarts")
+    expect(page).to have_content("CartsMgarts")
   end
 end
