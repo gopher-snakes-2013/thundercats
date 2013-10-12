@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <head>
   <title>jokez f'days</title>
-  <link href="../public/style.css" rel="stylesheet" type="text/css">
+  <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
-<h1>JokeZ</h1>
-<br/>
-<% if @new_user.id != nil %>
-  <p>Welcome to jokez landz <%= @new_user.username %></p>
-<%end%>
-
-<p><%= "Welcome #{@welcome_name}!" %></p>
-
-<div>
-  <a href="/signup">Sign Up</a>
-  <p> OR </p>
-</div>
-<div>
-  <form action="/login" method="post">
-    <br/>
-    <input type="text" name="username" placeholder="username">
-    <br/>
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Log In">
-  </form>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="/">
+      <h1>jokez</h1>
+    </a>
+  </div>
+  <div class="joke-links">
+    <% @posts.each do |post| %>
+      <p><a href="/detail/<%= post.id %>"><%= post.title %></a></p>
+    <% end %>
+  </div>
 </div>
 
-<ul>
-  <% @posts.each do |post| %>
-    <li><a href="/detail/<%= post.id %>"><%= post.title %></a>
+<div class="footer">
+  <div class="joke-input">
+    <p id="error">
+      <% unless @post.errors.empty? %>
+        <%= @post.errors.full_messages.first.to_s.downcase %>
+      <% end %>
+    </p>
+    <span class="joke-prompt">enter a joke</span>
+    <br/><br/>
+    <form action="/form" method="post">
+      <input type="text" size="40" name="title" placeholder="SO YOU GOT JOKES?!" value="<%= @post.title %>">
       <br/>
-      <em><%= post.content[0..25] %></em>
-    </li>
-  <% end %>
-</ul>
+      <input class="joke-input" type="text" size="40" name="content" placeholder="PUNCHLINE" value="<%= @post.content %>">
+      <br/>
+      <input type="submit" value="submit">
+    </form>
+  </div>
 
-<p>Enter a JOKE!</p>
+  <div class="sign-up">
+    <a href="/signup">sign up</a>
+  </div>
 
-<% unless @post.errors.empty? %>
-  <%= @post.errors.full_messages.first %>
-<% end %>
 
-<br/><br/>
+  <div class="welcome-login">
+    <div class="welcome-message">
+      <p><%= "welcome #{@welcome_name}" %>
+        <% if @new_user.id != nil %>
+          <%= @new_user.username %>
+        <%end%>
+      </p>
+    </div>
+    <div class="login">
+      <form action="/login" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password"><br/>
+        <input type="submit" value="log in">
+      </form>
+    </div>
+  </div>
+</div>
 
-<form action="/form" method="post">
-	<label>Title
-		<br/>
-	  <input type="text" name="title" value="<%=@post.title%>">
-  </label>
-  <br/>
-  <label>Content
-  	<br/>
-  	<textarea rows="5" cols="50" name="content"><%=@post.content%></textarea>
-  </label>
-	  <input type="submit" value="Submit">
-</form>
-
-<!-- <p>hi cricket... aka code name konami</p> -->
+</body>
+</html>

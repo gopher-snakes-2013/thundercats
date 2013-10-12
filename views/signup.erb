@@ -1,21 +1,96 @@
 <!DOCTYPE html>
 <head>
   <title>sign up</title>
-  <link href="../public/style.css" rel="stylesheet" type="text/css">
+  <style>
+
+    body {
+      background: white;
+      color: black;
+      font-family: helvetica-light;
+      margin: 0;
+    }
+
+    div.container {
+      width: 960px;
+      height: 480px;
+      margin: 50px;
+      overflow: scroll;
+    }
+
+    div.home {
+      position:fixed;
+      left:0;
+      bottom:0;
+      padding-left:50px;
+      padding-bottom:50px;
+    }
+
+    div.header {
+      font-family: Monaco;
+      font-size: 16px;
+      color: black;
+    }
+
+    input, textarea {
+      padding: 5px;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    input[type="submit"] {
+      font-family: helvetica-light;
+      font-size: 14px;
+      padding: 5px;
+      background: white;
+      color: red;
+      border: 0px solid;
+      border-radius: 0px;
+    }
+
+    input[type="submit"]:hover {
+      color: black;
+    }
+
+    a:link {
+      font-size: 20px;
+      text-decoration: none;
+      color: red;
+    }
+
+    a:visited {
+      font-size: 20px;
+      text-decoration: none;
+      color: red;
+    }
+
+    a:hover {
+      font-size: 20px;
+      text-decoration: none;
+      color: black;
+      cursor: default;
+    }
+  </style>
 </head>
 
-<h1>sign up</h1>
 <body>
+  <div class="container">
+    <div class="header">
+      <h1>sign up</h1>
+    </div>
 
-  <form action="/signup" method="post">
-    <br/>
-    <input type="text" name="username" placeholder="username">
-    <br/><br/>
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Sign Up">
-  </form>
+    <div class="sign-up">
+      <form class="sign-up" action="/signup" method="post">
+        <input type="text" name="username" placeholder="username">
+        <br/>
+        <input type="password" name="password" placeholder="password">
+        <br/>
+        <input type="submit" value="sign up">
+      </form>
+    </div>
 
-  <br/>
-  <a href="/">Go Home</a>
+    <div class="home">
+    <a href="/">home</a>
+    </div>
+  </div>
 </body>
 </html>

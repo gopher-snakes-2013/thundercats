@@ -78,7 +78,7 @@ helpers do
   def render_detail_page
     @specific_post = Post.find(params["post_id"])
     @comments = @specific_post.comments
-    @comm_errors = @comment.errors.full_messages.first
+    @comm_errors = @comment.errors.full_messages.first.downcase
     erb :detail
   end
 end

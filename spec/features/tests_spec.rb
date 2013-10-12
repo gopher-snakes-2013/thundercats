@@ -38,45 +38,45 @@ feature 'Index page errors' do
     fill_in "title", with: "hi"
     fill_in "content", with: "what"
 
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Needs more than 4 characters")
+    expect(page).to have_content("needs more than 4 characters")
   end
 
   scenario "user inputs too short content" do
     visit '/'
     fill_in "title", with: "An aweseome joke"
     fill_in "content", with: "a"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Needs more than 1 character")
+    expect(page).to have_content("needs more than 1 character")
   end
 
   scenario "user inputs blank for title" do
     visit '/'
     fill_in "title", with: ""
     fill_in "content", with: "aeiou and sometimes y"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("title can't be blank")
   end
 
   scenario "user inputs blank for content" do
     visit '/'
     fill_in "content", with: ""
     fill_in "title", with: "An interesting title"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("content can't be blank")
   end
 
   scenario "user inputs blank for content" do
     visit '/'
     fill_in "content", with: ""
     fill_in "title", with: "An interesting title"
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("content can't be blank")
   end
 end
 
@@ -86,9 +86,9 @@ feature 'Details page errors' do
     post = Post.create(title: "title", content: "content")
     visit "/detail/#{post.id}"
     fill_in "content", with: ""
-    click_on "Submit"
+    click_on "submit"
 
-    expect(page).to have_content("Content can't be blank")
+    expect(page).to have_content("content can't be blank")
   end
 
 end
