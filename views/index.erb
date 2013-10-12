@@ -43,10 +43,11 @@
 
   <div class="welcome-login">
     <div class="welcome-message">
-      <p><%= "welcome #{@welcome_name}" %></p>
-      <% if @new_user.id != nil %>
-        <p>to jokez landz <%= @new_user.username %></p>
-      <%end%>
+      <p><%= "welcome #{@welcome_name}" %>
+        <% if @new_user.id != nil %>
+          <%= @new_user.username %>
+        <%end%>
+      </p>
     </div>
     <div class="login">
       <form action="/login" method="post">
