@@ -18,6 +18,7 @@ rescue LoadError
 end
 
 get '/' do
+  @user = User.new
   render_home_page
 end
 
@@ -26,9 +27,9 @@ get '/signup' do
   erb :signup
 end
 
-post '/create_user' do
+post '/signup' do
   @user = User.create(username: params["username"], password: params["password"])
-  erb :signup
+  render_home_page
 end
 
 post '/form' do

@@ -7,21 +7,20 @@
 <h1>sign up</h1>
 <body>
 
-  <form action="/create_user" method="post">
+  <form action="/signup" method="post">
     <br/>
     <input type="text" name="username" placeholder="username">
     <br/><br/>
-    <input type="text" name="password" placeholder="password">
-    <input type="submit" value="Submit">
+    <input type="password" name="password" placeholder="password">
+    <input type="submit" value="Sign Up">
   </form>
 
-  <% if @user.id != nil %>
-    <p>Welcome to jokez landz <%= @user.username %></p>
-  <%end%>
+  <br/>
+  <a href="/">Go Home</a>
 </body>
 </html>
 
-# thunder helpers for login
+<!-- # thunder helpers for login
 # thunder rack flash
 # thunder spechelper, dumps the database every time
-# error for user already in the database
+# error for user already in the database -->
