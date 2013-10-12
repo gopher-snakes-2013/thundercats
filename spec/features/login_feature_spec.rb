@@ -26,8 +26,8 @@ feature "user sign up" do
     fill_in "username", with: "CartsMgarts"
     fill_in "password", with: "password"
 
-    click_on "Sign Up"
+    click_on "sign up"
 
-    expect(page).to have_content("Welcome to jokez landz CartsMgarts")
+    expect(page).to have_content("to jokez landz CartsMgarts")
   end
 end

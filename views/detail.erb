@@ -1,28 +1,147 @@
 <!DOCTYPE html>
-<head> 
+<head>
   <title> <%=@specific_post.title %> </title>
-  <link href="../public/style.css" rel="stylesheet" type="text/css">
+  <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+<style>
+
+body {
+  background: white;
+  color: black;
+  font-family: helvetica-light;
+}
+
+div.header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top:50px;
+  padding-bottom:50px;
+  padding-right: 50px;
+  padding-left:50px;
+  text-align: left;
+  overflow: scroll;
+  background-color: #FFFFFF;
+}
+
+div.form {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-right:50px;
+  padding-bottom:50px;
+  text-align: right;
+  overflow: hidden;
+}
+
+div.comments {
+  position: relative;
+  padding-left:50px;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: Monaco;
+  font-size: 40px;
+  color: black;
+}
+
+h2 {
+  font-family: Monaco;
+  font-size: 30px;
+  color: black;
+}
+
+p.punchline {
+  font-size:20px;
+}
+
+a:link {
+  font-size: 20px;
+  text-decoration: none;
+  color: red;
+}
+
+a:visited {
+  font-size: 20px;
+  text-decoration: none;
+  color: red;
+}
+
+a:hover {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  cursor: default;
+}
+
+a.home {
+  position:fixed;
+  left:0;
+  bottom:0;
+  padding-left: 60px;
+  padding-bottom: 50px;
+}
+
+span.joke-prompt {
+  position:relative;
+  padding-right: 1px;
+  font-family: Monaco;
+  font-size: 20px;
+}
+
+p#error {
+  position:relative;
+  padding-right: 6px;
+  font-size:12px;
+}
+
+input, textarea {
+  padding: 5px;
+  font-size: 12px;
+  text-align: right;
+}
+
+input[type="submit"] {
+  font-family: helvetica-light;
+  font-size: 14px;
+  padding: 5px;
+  background: white;
+  color: red;
+  border: 0px solid;
+  border-radius: 0px;
+}
+
+input[type="submit"]:hover {
+  color: black;
+}
+
+</style>
+
 </head>
 
-<h2><%= @specific_post.title %></h2>
-<p><%= @specific_post.content %></p>
+<body>
+  <div class="header">
+    <h2><%= @specific_post.title %></h2>
+    <p class="punchline"><%= @specific_post.content %></p>
+  </div>
+  <div class="form">
+    <p id="error"><%= @comm_errors %></p>
+    <form action="/comment" method="post">
+      <textarea rows="3" cols="30" name="content" placeholder="COMMENTZ"></textarea>
+      <br/><input type="submit" value="submit">
+      <input type="hidden" name="post_id" value="<%= @specific_post.id %>">
+    </form>
+  </div>
+
+<div class="comments">
+  <% @comments.each do |comment| %>
+      <p><%= comment.content %></p>
+  <% end %>
+</div>
+
 <br/>
-
-<%= @comm_errors %>
-
-<form action="/comment" method="post"><br/>
-  <label>Comment<br/>
-  <textarea rows="5" cols="50" name="content"></textarea>
-  </label>
-  <input type="submit" value="Submit">
-  <input type="hidden" name="post_id" value="<%= @specific_post.id %>"> 
-</form>
-
-<ol>
-<% @comments.each do |comment| %>
-  <li><%= comment.content %></li>
-<% end %>
-</ol>
-
-<h4><a href="/">Go Home</a></h4>
+<a class="home" href="/">home</a>
+</body>
 </html>
