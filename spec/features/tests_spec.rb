@@ -11,10 +11,6 @@ describe 'Pages' do
     get '/'
     expect(last_response).should be_ok
   end
-  # context "post title" do
-  #   it "should show error message on page if too short" do
-  #     expect(page).to include
-  # end
 end
 
 describe Post do
@@ -23,18 +19,18 @@ describe Post do
     it { should validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
     it { should_not allow_value("*"*4).for(:title) }
-  end 
+  end
 end
 
 describe Comment do
   context "checking validations" do
     it { should belong_to(:post) }
     it { should validate_presence_of(:content) }
-    it { should_not allow_value("*"*1).for(:content) } 
+    it { should_not allow_value("*"*1).for(:content) }
   end
 end
 
-# CAPYBARA 
+# CAPYBARA
 
 feature 'Index page errors' do
   scenario "user inputs too short title" do
@@ -87,8 +83,8 @@ end
 feature 'Details page errors' do
 
   scenario "user inputs blank comment" do
-    # post = Post.create(title: "title", content: "content")
-    visit '/detail/1'
+    post = Post.create(title: "title", content: "content")
+    visit "/detail/#{post.id}"
     fill_in "content", with: ""
     click_on "Submit"
 
@@ -96,17 +92,3 @@ feature 'Details page errors' do
   end
 
 end
-
-# feature 'Guest creates title' do
-#   scenario "it creates post title" do
-#     visit '/'
-#     fill_in "title", with: "(rspec) World's funniest joke"
-#     fill_in "content", with: "(rspec) How do you put a baby into a jar?"
-
-#     click_on "Submit"
-
-#     expect(page).to have_content("(rspec) World's funniest joke")
-#     expect(page).to have_content("(rspec) How do you put a baby into a jar?")
-#   end
-# end
-

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<head> 
+<head>
   <title>jokez f'days</title>
   <link href="../public/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <h1>JokeZ</h1>
+<br/>
+<% if @new_user.id != nil %>
+  <p>Welcome to jokez landz <%= @new_user.username %></p>
+<%end%>
+
+<p><%= "Welcome #{@welcome_name}!" %></p>
+
+<div>
+  <a href="/signup">Sign Up</a>
+  <p> OR </p>
+</div>
+<div>
+  <form action="/login" method="post">
+    <br/>
+    <input type="text" name="username" placeholder="username">
+    <br/>
+    <input type="password" name="password" placeholder="password">
+    <input type="submit" value="Log In">
+  </form>
+</div>
 
 <ul>
   <% @posts.each do |post| %>
@@ -23,10 +43,10 @@
 
 <br/><br/>
 
-<form action="/form" method="post">  
+<form action="/form" method="post">
 	<label>Title
 		<br/>
-	  <input type="text" name="title" value="<%=@post.title%>">  
+	  <input type="text" name="title" value="<%=@post.title%>">
   </label>
   <br/>
   <label>Content
@@ -34,6 +54,6 @@
   	<textarea rows="5" cols="50" name="content"><%=@post.content%></textarea>
   </label>
 	  <input type="submit" value="Submit">
-</form>  
+</form>
 
 <!-- <p>hi cricket... aka code name konami</p> -->
