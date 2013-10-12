@@ -1,3 +1,8 @@
+<!-- # thunder helpers for login
+# thunder rack flash
+# thunder spechelper, dumps the database every time
+# error for user already in the database -->
+
 This is Zee showing us how to create a heroku staging app
   569  ls -alt .git
   570  more .git/config

@@ -31,7 +31,3 @@ feature "user sign up" do
     expect(page).to have_content("Welcome to jokez landz CartsMgarts")
   end
 end
-
-# feature "Login form" do
-#   secnario "us"
-# end

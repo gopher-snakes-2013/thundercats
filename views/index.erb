@@ -6,9 +6,11 @@
 
 <h1>JokeZ</h1>
 <br/>
-<% if @user.id != nil %>
-  <p>Welcome to jokez landz <%= @user.username %></p>
+<% if @new_user.id != nil %>
+  <p>Welcome to jokez landz <%= @new_user.username %></p>
 <%end%>
+
+<p><%= "Welcome #{@welcome_name}!" %></p>
 
 <div>
   <a href="/signup">Sign Up</a>
