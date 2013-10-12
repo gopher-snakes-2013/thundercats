@@ -5,6 +5,7 @@ require 'sinatra/activerecord'
 require 'shotgun'
 require 'models/post'
 require 'models/comment'
+require 'models/user'
 
 # This loads environment variables from the .env file
 begin
@@ -18,6 +19,16 @@ end
 
 get '/' do
   render_home_page
+end
+
+get '/signup' do
+  @user = User.new
+  erb :signup
+end
+
+post '/create_user' do
+  @user = User.create(username: params["username"], password: params["password"])
+  erb :signup
 end
 
 post '/form' do
@@ -44,7 +55,7 @@ post '/comment' do
   end
 end
 
-# Initialize render_home_page with local variables if they 
+# Initialize render_home_page with local variables if they
 # exist otherwise create new @post and @posts
 helpers do
   def render_home_page(local_variables={})
